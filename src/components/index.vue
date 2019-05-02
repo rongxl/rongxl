@@ -136,7 +136,11 @@
       <div class="main-tit">
         <h2>{{item.catetitle}}</h2>
         <p>
-          <a href="/goods/43.html" v-for="(it, i) in item.level2catelist" :key="i">{{it.subcatetitle}}</a>
+          <a
+            href="/goods/43.html"
+            v-for="(it, i) in item.level2catelist"
+            :key="i"
+          >{{it.subcatetitle}}</a>
           <a href="/goods/40.html">
             更多
             <i>+</i>
@@ -147,9 +151,10 @@
         <div class="wrap-box">
           <ul class="img-list">
             <li v-for="(it, i) in item.datas" :key="i">
-              <a href="#/site/goodsinfo/87" class>
+              <router-link :to="'/detail/'+it.artID">
+                <!-- <a href="#/site/goodsinfo/87" class> -->
                 <div class="img-box">
-                  <img :src="it.img_url" alt="">
+                  <img :src="it.img_url" alt>
                 </div>
                 <div class="info">
                   <h3>{{it.artTitle}}</h3>
@@ -164,7 +169,8 @@
                     </span>
                   </p>
                 </div>
-              </a>
+              </router-link>
+              <!-- </a> -->
             </li>
           </ul>
         </div>
@@ -202,7 +208,6 @@ export default {
   },
   filters: {
     formatTime(value) {
-      // return value.split('T')[0]
       return moment(value).format("YYYY年MM月DD日HH时mm分ss秒");
     }
   }

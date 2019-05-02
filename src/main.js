@@ -8,6 +8,8 @@ import './assets/statics/site/css/style.css'
 
 import VueRouter from 'vue-router'
 
+import detail from './components/detail.vue'
+
 Vue.use(VueRouter)
 Vue.use(ElementUI);
 
@@ -18,6 +20,10 @@ const routes = [
   {
     path: '/index',
     component: index
+  },
+  {
+    path: '/detail/:id',
+    component: detail
   }
 ]
 
