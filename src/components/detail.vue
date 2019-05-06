@@ -201,7 +201,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+// import moment from 'moment';
 export default {
     name:"detail",
     data(){
@@ -220,11 +220,11 @@ export default {
           this.imglist   =res.data.message.imglist; 
       })
     },
-    filters: {
-    formatTime(value) {
-      return moment(value).format("YYYY年MM月DD日");
-    }
-  }
+  //   filters: {
+  //   formatTime(value) {
+  //     return moment(value).format("YYYY年MM月DD日");
+  //   }
+  // }
 };
 </script>
 
