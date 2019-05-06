@@ -18,6 +18,8 @@ import index from './components/index.vue'
 import axios from 'axios'
 Vue.prototype.$axios=axios;
 
+axios.defaults.baseURL = 'http://111.230.232.110:8899';
+
 
 const routes = [
   {
