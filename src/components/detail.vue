@@ -81,7 +81,11 @@
                     <a href="javascript:;" @click="showDesc=true" :class="{selected:showDesc}">商品介绍</a>
                   </li>
                   <li>
-                    <a href="javascript:;" @click="showDesc=false" :class="{selected:!showDesc}">商品评论</a>
+                    <a
+                      href="javascript:;"
+                      @click="showDesc=false"
+                      :class="{selected:!showDesc}"
+                    >商品评论</a>
                   </li>
                 </ul>
               </div>
@@ -119,37 +123,30 @@
                     <p
                       style="margin: 5px 0px 15px 69px; line-height: 42px; text-align: center; border: 1px solid rgb(247, 247, 247);"
                     >暂无评论，快来抢沙发吧！</p>
-                    <li>
+                    <li v-for="(item, index) in comments" :key="index">
                       <div class="avatar-box">
                         <i class="iconfont icon-user-full"></i>
                       </div>
                       <div class="inner-box">
                         <div class="info">
-                          <span>匿名用户</span>
-                          <span>2017/10/23 14:58:59</span>
+                          <span>{{item.user_name}}</span>
+                          <span>{{item.add_time | formatTime}}</span>
                         </div>
-                        <p>testtesttest</p>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="avatar-box">
-                        <i class="iconfont icon-user-full"></i>
-                      </div>
-                      <div class="inner-box">
-                        <div class="info">
-                          <span>匿名用户</span>
-                          <span>2017/10/23 14:59:36</span>
-                        </div>
-                        <p>很清晰调动单很清晰调动单</p>
+                        <p>{{item.content}}</p>
                       </div>
                     </li>
                   </ul>
                   <div class="page-box" style="margin: 5px 0px 0px 62px;">
-                    <div id="pagination" class="digg">
-                      <span class="disabled">« 上一页</span>
-                      <span class="current">1</span>
-                      <span class="disabled">下一页 »</span>
-                    </div>
+                    <el-pagination
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange"
+                      :current-page="pageIndex"
+                      :page-sizes="[5, 10, 15, 20]"
+                      :page-size="pageSize"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="totalcount"
+                      background
+                    ></el-pagination>
                   </div>
                 </div>
               </div>
@@ -162,12 +159,18 @@
                 <ul class="side-img-list">
                   <li v-for="(item, index) in hotgoodlist" :key="index">
                     <div class="img-box">
-                      <a href="#/site/goodsinfo/90" class>
+                      <router-link :to="'/detail/'+item.id">
+                        <!-- <a href="#/site/goodsinfo/90" class>+ -->
                         <img :src="item.img_url">
-                      </a>
+                      </router-link>
+                      <!-- </a> -->
                     </div>
                     <div class="txt-box">
-                      <a href="#/site/goodsinfo/90" class>{{item.title}}</a>
+                      <router-link :to="'/detail/'+item.id">
+                        <!-- <a href="#/site/goodsinfo/90" class> -->
+                        {{item.title}}
+                        <!-- </a> -->
+                      </router-link>
                       <span>{{item.add_time | formatTime}}</span>
                     </div>
                   </li>
@@ -182,7 +185,6 @@
 </template>
 
 <script>
-// import moment from 'moment';
 export default {
   name: "detail",
   data() {
@@ -191,8 +193,36 @@ export default {
       hotgoodlist: [],
       imglist: [],
       num: 1,
-      showDesc:true
+      showDesc: true,
+      pageIndex: 1,
+      pageSize: 30,
+      comments: [],
+      totalcount: 0
     };
+  },
+  methods: {
+    getComments() {
+      this.$axios
+        .get(
+          `site/comment/getbypage/goods/${this.$route.params.id}?pageIndex=${
+            this.pageIndex
+          }&pageSize=${this.pageSize}`
+        )
+        .then(res => {
+          this.totalcount = res.data.totalcount;
+          this.comments = res.data.message;
+        });
+    },
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`);
+      this.pageSize = val;
+      this.getComments();
+    },
+    handleCurrentChange(val) {
+      // console.log(`当前页: ${val}`);
+      this.pageIndex = val;
+      this.getComments();
+    }
   },
   created() {
     this.$axios
@@ -202,12 +232,18 @@ export default {
         this.hotgoodlist = res.data.message.hotgoodslist;
         this.imglist = res.data.message.imglist;
       });
+    this.getComments();
+  },
+  watch: {
+    "$route.params.id"(nw) {
+      this.$axios.get(`/site/goods/getgoodsinfo/${nw}`).then(res => {
+        this.goodsinfo = res.data.message.goodsinfo;
+        this.hotgoodlist = res.data.message.hotgoodslist;
+        this.imglist = res.data.message.imglist;
+      });
+      this.getComments();
+    }
   }
-  //   filters: {
-  //   formatTime(value) {
-  //     return moment(value).format("YYYY年MM月DD日");
-  //   }
-  // }
 };
 </script>
 
