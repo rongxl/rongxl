@@ -192,19 +192,15 @@ export default {
     };
   },
   created() {
-    this.$axios
-      .get("/site/goods/gettopdata/goods")
-      .then(res => {
-        this.catelist = res.data.message.catelist;
-        this.sliderlist = res.data.message.sliderlist;
-        this.toplist = res.data.message.toplist;
-      });
-    this.$axios
-      .get("/site/goods/getgoodsgroup")
-      .then(res => {
-        this.shoplist = res.data.message;
-      });
-  },
+    this.$axios.get("/site/goods/gettopdata/goods").then(res => {
+      this.catelist = res.data.message.catelist;
+      this.sliderlist = res.data.message.sliderlist;
+      this.toplist = res.data.message.toplist;
+    });
+    this.$axios.get("/site/goods/getgoodsgroup").then(res => {
+      this.shoplist = res.data.message;
+    });
+  }
   // filters: {
   //   formatTime(value) {
   //     return moment(value).format("YYYY年MM月DD日HH时mm分ss秒");
