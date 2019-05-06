@@ -201,7 +201,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import moment from 'moment';
 export default {
     name:"detail",
@@ -213,7 +212,7 @@ export default {
         }
     },
     created() {
-      axios
+      this.$axios
       .get(`http://111.230.232.110:8899/site/goods/getgoodsinfo/${this.$route.params.id}`)
       .then(res=>{
           this.goodsinfo  =res.data.message.goodsinfo; 

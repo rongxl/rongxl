@@ -15,11 +15,18 @@ Vue.use(ElementUI);
 
 import index from './components/index.vue'
 
+import axios from 'axios'
+Vue.prototype.$axios=axios;
+
 
 const routes = [
   {
     path: '/index',
     component: index
+  },
+  {
+    path: '/',
+    redirect:'/index'
   },
   {
     path: '/detail/:id',
