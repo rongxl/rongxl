@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: "gls"
+  name: "info"
 };
 </script>
 

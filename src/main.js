@@ -14,9 +14,10 @@ import './assets/statics/site/css/style.css'
 import index from './components/index.vue'
 import detail from './components/detail.vue'
 import centerContainer from './components/centerContainer.vue'
-import vipgls from './components/vipgls.vue'
+import info from './components/info.vue'
 import theTradeOrder from './components/theTradeOrder.vue'
 import theTraderDetails from './components/theTraderDetails.vue'
+import register from './components/register.vue'
 
 // 导入路由
 import VueRouter from 'vue-router'
@@ -60,14 +61,14 @@ const routes = [
 
       // 会员中心鼓励师
       {
-        path: 'vipgls',
-        component: vipgls
+        path: 'info',
+        component: info
       },
 
       // 会员中心重定向鼓励师
       {
         path: '',
-        redirect: 'vipgls'
+        redirect: 'info'
       },
 
       // 交易订单
@@ -82,6 +83,12 @@ const routes = [
         component: theTraderDetails
       }
     ]
+  },
+
+  //登录
+  {
+    path:'/register',
+    component:register
   }
 ]
 

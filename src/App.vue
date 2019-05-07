@@ -24,7 +24,11 @@
                 <!-- </a> -->
               </router-link>
               <strong>|</strong>
-              <a>退出</a>
+              <!-- <a> -->
+              <router-link to="./register">
+                退出
+                <!-- </a> -->
+              </router-link>
               <strong>|</strong>
             </span>
             <a href class>
