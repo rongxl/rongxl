@@ -18,7 +18,11 @@
               <strong>|</strong>
             </span>
             <span>
-              <a href class>会员中心</a>
+              <router-link to="/centerContainer">
+                <!-- <a href class> -->
+                会员中心
+                <!-- </a> -->
+              </router-link>
               <strong>|</strong>
               <a>退出</a>
               <strong>|</strong>
@@ -40,9 +44,9 @@
             <ul>
               <li class="index">
                 <!-- <a href="#" class> -->
-                  <router-link to="/index">
+                <router-link to="/index">
                   <span class="out" style="top: 0px;">首页</span>
-                  </router-link>
+                </router-link>
                 <!-- </a> -->
               </li>
               <li class="news">

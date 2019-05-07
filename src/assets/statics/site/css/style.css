@@ -96,7 +96,7 @@ table { border-collapse:collapse; border-spacing:0; }
     .header .head-top .left-box a{ margin:auto 3px; color:#fcfbfb; }
     .header .head-top .left-box a:hover{ color:#34ad2a; }
     .header .head-top .right-box{ float:right; margin-right:-8px; line-height:40px; }
-    .header .head-top .right-box a{ margin:auto 8px; color:#fcfbfb; _display:inline; *zoom:1; }
+    .header .head-top .right-box a{ margin:auto 8px; color:#fcfbfb; _display:inline; *zoom:1;cursor:pointer }
     .header .head-top .right-box a:hover{ color:#34ad2a; }
     .header .head-top .right-box a i{ margin-right:2px; font-size:12px; }
     .header .head-top .right-box strong{ color:#444; font-size:12px; font-weight:700; }
